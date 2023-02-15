@@ -1,0 +1,7 @@
+# Документированный вариант добавления своих хоткеев
+# Подробнее можно почитать тут (англ.): https://docs.mitmproxy.org/stable/concepts-commands/#custom-key-bindings
+# Скопируйте этот файл в ~/.mitmproxy/keys.yaml и запустите mitmproxy -s examples/add/cookie_command.py
+- key: "c"
+  cmd: "console.command custom_command.add_cookie @focus "
+  ctx: ["flowlist", "flowview"]
+  help: "Add cookie with specified name+value"
