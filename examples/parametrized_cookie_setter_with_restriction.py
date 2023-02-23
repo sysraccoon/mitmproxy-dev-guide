@@ -2,14 +2,14 @@
 Усложнённый вариант parametrized_cookie_setter.py в котором добавлена валидация выставленной опции
 """
 
-from typing import Optional
-from mitmproxy import ctx
 from mitmproxy.http import HTTPFlow
 from mitmproxy.addonmanager import Loader
+from mitmproxy import ctx
 from mitmproxy.exceptions import OptionsError
+from typing import Optional
 
 
-COOKIE_VALUE_MIN_LENGTH = 5
+COOKIE_MIN_LENGTH = 5
 
 
 def load(loader: Loader):
@@ -17,19 +17,23 @@ def load(loader: Loader):
         name="set_cookie_value",
         typespec=Optional[str],
         default=None,
-        help=f"Set 'my-test-cookie' cookie with specified value. Expected length {COOKIE_VALUE_MIN_LENGTH} or greater",
+        help="Set 'my-test-cookie' cookie with specified value\n" +
+             "Expect length {COOKIE_MIN_LENGTH} or greater",
     )
 
 
-def configure(updates: dict):
+def configure(updates: set):
     if "set_cookie_value" not in updates:
         return
 
     new_value = ctx.options.set_cookie_value
-    
-    if new_value is not None and len(new_value) < COOKIE_VALUE_MIN_LENGTH:
-        raise OptionsError(f"set_cookie_value must have length {COOKIE_VALUE_MIN_LENGTH} or more")
 
+    if new_value is None:
+        return
+    if len(new_value) >= COOKIE_MIN_LENGTH:
+        return
+    
+    raise OptionsError(f"len(set_cookie_value) < {COOKIE_MIN_LENGTH}")
 
 
 def request(flow: HTTPFlow):

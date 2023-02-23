@@ -7,8 +7,8 @@ from mitmproxy.http import HTTPFlow
 
 
 def request(flow: HTTPFlow):
-    logging.info(f"call request method for url: {flow.request.pretty_url}")
+    logging.info("call request method")
 
 
 def response(flow:HTTPFlow):
-    logging.info(f"call response method for url: {flow.request.pretty_url}")
+    logging.info("call response method")

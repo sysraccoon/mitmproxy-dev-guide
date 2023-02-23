@@ -6,6 +6,7 @@
 
 import subprocess
 
+
 def main():
     subprocess.run(["mitmdump", "-s", "url_log_addon.py"])
 

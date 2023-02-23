@@ -7,4 +7,7 @@ from mitmproxy.http import HTTPFlow
 
 def response(flow: HTTPFlow):
     response = flow.response
-    response.content = response.content.replace(b"Example Domain", b"Custom Domain")
+    response.content = response.content.replace(
+        b"Example Domain",
+        b"Custom Domain"
+    )

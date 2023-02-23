@@ -9,12 +9,14 @@ https://github.com/mitmproxy/mitmproxy/blob/244ff35e606e8ae7ca8aa15d7529566a97ec
 
 import asyncio
 import signal
+import logging
 
 from mitmproxy.options import Options
 from mitmproxy.tools.dump import DumpMaster
 
 
 def main():
+    logging.getLogger().setLevel(logging.DEBUG)
     asyncio.run(start_mitmproxy())
 
 
@@ -24,6 +26,9 @@ async def start_mitmproxy():
 
     loop = asyncio.get_running_loop()
     register_safe_exit(loop, master)
+
+    import url_log_addon
+    master.addons.add(url_log_addon)
 
     await master.run()
 

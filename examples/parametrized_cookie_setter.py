@@ -2,9 +2,9 @@
 Пример добавления и использования своих собственных опций
 """
 
-from mitmproxy import ctx
 from mitmproxy.http import HTTPFlow
 from mitmproxy.addonmanager import Loader
+from mitmproxy import ctx
 
 
 def load(loader: Loader):

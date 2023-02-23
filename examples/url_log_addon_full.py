@@ -9,10 +9,10 @@ from mitmproxy.http import HTTPFlow
 
 class UrlLogAddon:
     def request(self, flow: HTTPFlow):
-        logging.info(f"call request method for url: {flow.request.pretty_url}")
+        logging.info(f"call request method")
     
     def response(self, flow: HTTPFlow):
-        logging.info(f"call response method for url: {flow.request.pretty_url}")
+        logging.info(f"call response method")
 
 
 addons = [UrlLogAddon()]
